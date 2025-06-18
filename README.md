@@ -1,16 +1,18 @@
-# CSV Processor
+# 📂 CSV Processor
 
 Утилита для обработки CSV файлов с поддержкой фильтрации и агрегации данных.
 
-## Установка
+---
+
+## 🗂 Описание (на русском)
+
+### 📦 Установка
 
 ```bash
 pip install -r requirements.txt
 ```
 
-## Использование
-
-### Основные команды
+### 🚀 Использование
 
 ```bash
 # Показать все данные
@@ -32,52 +34,126 @@ python csv_processor.py sample_data.csv --aggregate "price=max"
 python csv_processor.py sample_data.csv --filter "brand=eq=xiaomi" --aggregate "price=avg"
 ```
 
-### Поддерживаемые операторы
+### 🔧 Поддерживаемые операторы
 
-- `eq` или `==` - равенство
-- `gt` или `>` - больше
-- `lt` или `<` - меньше
+- `eq` или `==` — равенство
+- `gt` или `>` — больше
+- `lt` или `<` — меньше
 
-### Поддерживаемые функции агрегации
+### 📊 Поддерживаемые функции агрегации
 
-- `avg` - среднее значение
-- `min` - минимальное значение
-- `max` - максимальное значение
+- `avg` — среднее значение
+- `min` — минимальное значение
+- `max` — максимальное значение
 
-## Тестирование
+### 🧪 Тестирование
 
 ```bash
 # Запуск тестов
 pytest
 
-# Запуск тестов с покрытием кода
+# Покрытие кода (HTML-отчет)
 pytest --cov=csv_processor --cov-report=html
 
-# Запуск тестов с детальным отчетом
+# Подробный отчет в терминале
 pytest -v --cov=csv_processor --cov-report=term-missing
 ```
 
-## Примеры работы
+### 💡 Примеры
 
-### Фильтрация по бренду
 ```bash
-$ python csv_processor.py sample_data.csv --filter "brand=eq=xiaomi"
+# Фильтрация по бренду
+python csv_processor.py sample_data.csv --filter "brand=eq=xiaomi"
+
+# Агрегация по цене
+python csv_processor.py sample_data.csv --aggregate "price=avg"
+
+# Комбинированный запрос
+python csv_processor.py sample_data.csv --filter "price=gt=400" --aggregate "rating=avg"
 ```
 
-### Агрегация по цене
+### 🧱 Архитектура
+
+Проект реализован с использованием паттерна **Стратегия**, что позволяет легко добавлять новые операторы фильтрации и агрегации без изменения основного кода.
+
+- `FilterOperator` — базовый класс операторов фильтрации
+- `AggregationFunction` — базовый класс агрегационных функций
+- `CSVProcessor` — основной класс обработки данных
+
+---
+
+## 📘 Description (in English)
+
+### 📦 Installation
+
 ```bash
-$ python csv_processor.py sample_data.csv --aggregate "price=avg"
+pip install -r requirements.txt
 ```
 
-### Комбинированный запрос
+### 🚀 Usage
+
 ```bash
-$ python csv_processor.py sample_data.csv --filter "price=gt=400" --aggregate "rating=avg"
+# Show all data
+python csv_processor.py sample_data.csv
+
+# Filter by equality
+python csv_processor.py sample_data.csv --filter "brand=eq=xiaomi"
+
+# Filter by numeric values
+python csv_processor.py sample_data.csv --filter "price=gt=500"
+python csv_processor.py sample_data.csv --filter "rating=lt=4.5"
+
+# Aggregate data
+python csv_processor.py sample_data.csv --aggregate "price=avg"
+python csv_processor.py sample_data.csv --aggregate "rating=min"
+python csv_processor.py sample_data.csv --aggregate "price=max"
+
+# Combine filtering and aggregation
+python csv_processor.py sample_data.csv --filter "brand=eq=xiaomi" --aggregate "price=avg"
 ```
 
-## Архитектура
+### 🔧 Supported Operators
 
-Проект построен с использованием паттерна Стратегия для операторов фильтрации и функций агрегации, что позволяет легко добавлять новые операторы и функции без изменения существующего кода.
+- `eq` or `==` — equal
+- `gt` or `>` — greater than
+- `lt` or `<` — less than
 
-- `FilterOperator` - абстрактный базовый класс для операторов фильтрации
-- `AggregationFunction` - абстрактный базовый класс для функций агрегации
-- `CSVProcessor` - основной класс для обработки CSV файлов
+### 📊 Supported Aggregation Functions
+
+- `avg` — average
+- `min` — minimum
+- `max` — maximum
+
+### 🧪 Testing
+
+```bash
+# Run tests
+pytest
+
+# Code coverage (HTML report)
+pytest --cov=csv_processor --cov-report=html
+
+# Verbose terminal report
+pytest -v --cov=csv_processor --cov-report=term-missing
+```
+
+### 💡 Examples
+
+```bash
+# Filter by brand
+python csv_processor.py sample_data.csv --filter "brand=eq=xiaomi"
+
+# Aggregate price
+python csv_processor.py sample_data.csv --aggregate "price=avg"
+
+# Combined query
+python csv_processor.py sample_data.csv --filter "price=gt=400" --aggregate "rating=avg"
+```
+
+### 🧱 Architecture
+
+The project uses the **Strategy pattern**, which makes it easy to add new filtering operators or aggregation functions without modifying core logic.
+
+- `FilterOperator` — base class for filtering operators
+- `AggregationFunction` — base class for aggregation functions
+- `CSVProcessor` — main processing class
